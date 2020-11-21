@@ -1,24 +1,38 @@
-
+import React, { Fragment, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
+import Home from './components/home/Home';
+import store from './store';
+import Authenticate from './components/auth/Authenticate';
+import setAuthToken from './helpers/tokenHelper';
+import { Provider } from 'react-redux';
+import Alerter from './components/layout/Alerter';
+import { loadUser } from './actions/auth';
 import './App.css';
 
-function App() {
+const App = () => {
+  if (localStorage.token) {
+    setAuthToken(localStorage.token);
+  }
+
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Fragment >
+          <Navbar />
+          <Alerter />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/authenticate' component={Authenticate} />
+          </Switch>
+        </Fragment>
+      </Router>
+    </Provider>
   );
-}
+};
 
 export default App;
