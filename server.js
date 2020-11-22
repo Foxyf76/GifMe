@@ -1,4 +1,6 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const connectDB = require('./config/db');
 
 const app = express();
@@ -6,7 +8,20 @@ const app = express();
 // Connect to DB
 connectDB();
 
+// Init middleware
+app.use(bodyParser({ limit: '50mb' }));
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
 app.use(express.json({ extended: false }));
+
+// Fix cors error
+app.use(
+  cors({
+    origin: 'http://localhost:3000', // allow to server to accept request from different origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // allow session cookie from browser to pass through
+  })
+);
 
 // Default route
 app.get('/', (req, res) => {
