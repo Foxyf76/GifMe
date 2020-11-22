@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { getImages } from '../../actions/home';
-import Gallery from 'react-photo-gallery';
+import { Grid } from '@giphy/react-components';
+import ResizeObserver from 'react-resize-observer';
+import { useBottomScrollListener } from 'react-bottom-scroll-listener';
 
-const Home = ({ getImages, setAlert }) => {
+const Home = ({ getImages, setAlert, alertOnBottom }) => {
   const [images, setImages] = useState([]);
-  const [offset, setOffset] = useState(0);
-  useEffect(() => {
-    async function retrieveTrending() {
-      let trending = await getImages(offset);
-      setImages(trending);
-      images.forEach((image) => {
-        console.log(image.src);
-      });
-    }
+  const [width, setWidth] = useState(window.innerWidth);
 
-    retrieveTrending();
-  }, []);
+  const getGifs = async (offset) => {
+    console.log(offset);
+    await getImages(offset);
+  };
 
   return (
     <div>
-      {images.length === 0 ? <h1>Loading</h1> : <Gallery photos={images} />}
+      <Grid width={width} fetchGifs={getImages} columns={3} gutter={6} />
+      <ResizeObserver
+        onResize={({ width }) => {
+          setWidth(width);
+        }}
+      />
     </div>
   );
 };

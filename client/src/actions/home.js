@@ -8,28 +8,27 @@ import { setAlert } from './alert';
 
 export const getImages = (offset) => async (dispatch) => {
   try {
-    let cleanedImages = [];
-    const res = await axios.post('/api/images/get-trending', {
-      offset: offset,
-    });
+    console.log(offset);
+    const res = await axios.post('/api/images/get-trending', { offset });
 
-    let { data } = res.data;
-
-    if (res.status === 200) {
-      data.forEach((image) => {
-        cleanedImages.push({
-          id: image.id,
-          src: image.images.downsized.url,
-          height: image.images.downsized_small.height.charAt(0),
-          width: image.images.downsized_small.width.charAt(0),
-          user_avatar: image.user ? image.user.avatar_url : '',
-          user_name: image.user ? image.user.display_name : '',
-          user_url: image.user ? image.user.profile_url : '',
-        });
-      });
-      return cleanedImages;
-    }
+    let data = res.data;
+    return data;
   } catch (err) {
+    // let { data } = res.data;
+
+    // if (res.status === 200) {
+    //   data.forEach((image) => {
+    //     cleanedImages.push({
+    //       id: image.id,
+    //       src: image.images.downsized.url,
+    //       height: image.images.downsized_small.height.charAt(0),
+    //       width: image.images.downsized_small.width.charAt(0),
+    //       user_avatar: image.user ? image.user.avatar_url : '',
+    //       user_name: image.user ? image.user.display_name : '',
+    //       user_url: image.user ? image.user.profile_url : '',
+    //     });
+    //   });
+
     console.log(err);
     const errors = err.response.data.errors;
     if (errors) {
