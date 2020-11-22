@@ -1,30 +1,26 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import { getImages } from '../../actions/home';
-import { Grid } from '@giphy/react-components';
+import { Grid as GiphyGrid } from '@giphy/react-components';
 import ResizeObserver from 'react-resize-observer';
-import { useBottomScrollListener } from 'react-bottom-scroll-listener';
+import { Grid } from '@material-ui/core';
 
-const Home = ({ getImages, setAlert, alertOnBottom }) => {
-  const [images, setImages] = useState([]);
+const Home = ({ getImages, setAlert }) => {
   const [width, setWidth] = useState(window.innerWidth);
 
-  const getGifs = async (offset) => {
-    console.log(offset);
-    await getImages(offset);
-  };
-
   return (
-    <div>
-      <Grid width={width} fetchGifs={getImages} columns={3} gutter={6} />
-      <ResizeObserver
-        onResize={({ width }) => {
-          setWidth(width);
-        }}
-      />
-    </div>
+    <Grid container alignItems='center' justify='center' alignContent='center'>
+      <Grid item style={{ width: '70%' }}>
+        <GiphyGrid width={width} fetchGifs={getImages} columns={4} gutter={6} />
+        <ResizeObserver
+          onResize={({ width }) => {
+            setWidth(width);
+          }}
+        />
+      </Grid>
+    </Grid>
   );
 };
 

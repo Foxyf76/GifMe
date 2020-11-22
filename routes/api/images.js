@@ -1,11 +1,9 @@
 const express = require('express');
 const config = require('config');
 const router = express.Router();
-const axios = require('axios');
 global.fetch = require('node-fetch');
 
 const giphy = require('@giphy/js-fetch-api');
-
 const gf = new giphy.GiphyFetch(config.get('giphyKey'));
 
 router.post('/get-trending', async (req, res) => {

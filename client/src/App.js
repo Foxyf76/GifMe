@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import Alerter from './components/layout/Alerter';
 import { loadUser } from './actions/auth';
 import './App.css';
+import Navbar from './components/layout/Navbar';
 
 const App = () => {
   if (localStorage.token) {
@@ -22,6 +23,7 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
+          <Navbar />
           <Alerter />
           <Switch>
             <Route exact path='/' component={Home} />
