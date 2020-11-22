@@ -65,7 +65,7 @@ export const register = ({ name, email, password }) => async (dispatch) => {
 
     if (errors) {
       console.log(err);
-      // errors.forEach((error) => dispatch(setAlert(error.msg, 'warning')));
+      errors.forEach((error) => dispatch(setAlert(error.msg, 'warning')));
     }
 
     dispatch({
@@ -76,12 +76,12 @@ export const register = ({ name, email, password }) => async (dispatch) => {
 
 /**
  * Log User in
- * @param {string} username - Username
+ * @param {string} email - User email
  * @param {string} password - User password
  */
 
-export const login = (username, password) => async (dispatch) => {
-  const body = { username, password };
+export const login = (email, password) => async (dispatch) => {
+  const body = { email, password };
 
   try {
     const res = await axios.post('/api/auth/login', body);

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
 import {
   Button,
-  ButtonGroup,
   Collapse,
   FormGroup,
   Grid,
@@ -15,20 +14,17 @@ import {
   Tab,
   Tabs,
   TextField,
-  Typography,
 } from '@material-ui/core';
 import { Link, Redirect } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
-
 import {
   LockOpen,
   PersonAdd,
-  VerifiedUser,
   Visibility,
   VisibilityOff,
   Home,
 } from '@material-ui/icons';
-import { colSecondary } from '../../helpers/colors';
+import { colPrimary, colSecondary } from '../../helpers/colors';
+import { login, register } from '../../actions/auth';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -58,9 +54,9 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    backgroundColor: 'red',
+    backgroundColor: colSecondary,
     '&:hover': {
-      background: 'blue',
+      background: colPrimary,
     },
   },
 }));
@@ -89,7 +85,8 @@ const Authenticate = ({ setAlert, register, isAuthenticated, login }) => {
   const { name, email, password, confirm_password } = formData;
 
   if (isAuthenticated) {
-    return <Redirect to='/home' />;
+    console.log('AUTH');
+    return <Redirect to='/' />;
   }
 
   const handleClickShowPassword = () => {
@@ -304,6 +301,14 @@ const Authenticate = ({ setAlert, register, isAuthenticated, login }) => {
 
 Authenticate.propTypes = {
   setAlert: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
-export default connect(null, { setAlert })(Authenticate);
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { setAlert, login, register })(
+  Authenticate
+);

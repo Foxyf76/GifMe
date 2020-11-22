@@ -66,9 +66,12 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
             <Grid item xs={4}>
               {isAuthenticated & (user != null) ? (
                 <Grid container justify='flex-end'>
-                  <Typography style={{ padding: '10px' }}>
-                    <h1>authenticated name</h1>
-                  </Typography>
+                  <img
+                    src={user.avatar}
+                    width={50}
+                    height={50}
+                    style={{ borderRadius: '200px' }}
+                  />
                   <Button color='inherit' onClick={() => logout()}>
                     Log Out
                   </Button>
