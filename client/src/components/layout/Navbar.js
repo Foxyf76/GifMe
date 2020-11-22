@@ -12,6 +12,8 @@ import { setAlert } from '../../actions/alert';
 import PropTypes from 'prop-types';
 import { Grid, Grow } from '@material-ui/core';
 import { Spin as Hamburger } from 'hamburger-react';
+import { Link } from 'react-router-dom';
+import { colPrimary } from '../../helpers/colors';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -39,7 +41,7 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
       <AppBar
         position='static'
         style={{
-          backgroundColor: 'rgb(40, 40, 180)',
+          backgroundColor: colPrimary,
         }}
       >
         <Toolbar
@@ -73,7 +75,12 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
                 </Grid>
               ) : (
                 <Grid container justify='flex-end'>
-                  <Button color='inherit'>Login</Button>
+                  <Link
+                    to='/authenticate'
+                    style={{ textDecoration: 'none', color: 'white' }}
+                  >
+                    <Button color='inherit'>Sign In</Button>
+                  </Link>
                 </Grid>
               )}
             </Grid>
