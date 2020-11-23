@@ -42,14 +42,14 @@ const Home = ({ getImages, searchImages, setAlert }) => {
     }
   }, [query]);
 
-  let test = () => {
+  const handleSearch = () => {
     return searchImages(query);
   };
 
   return (
     <Grid container alignItems='center' justify='center' alignContent='center'>
       <Grid item style={{ width: '70%' }}>
-        <div
+        <Paper
           style={{
             backgroundColor: colSecondary,
             padding: '10px',
@@ -61,23 +61,23 @@ const Home = ({ getImages, searchImages, setAlert }) => {
             <SearchOutlined fontSize='large' />
             <InputBase
               className={classes.input}
-              onInput={(e) => setQuery(e.target.value)}
+              onInput={(e) => {
+                if (!e.target.value !== query) {
+                  setDisplaySearch(false);
+                  setQuery(e.target.value);
+                }
+              }}
               onKeyPress={(ev) => {
                 if (ev.key === 'Enter') {
-                  // if (query === '') {
-                  //   setDisplaySearch(false);
-                  // } else {
                   setDisplaySearch(true);
                 }
               }}
             />
           </Paper>
-        </div>
-
-        {/* <GiphyGrid width={width} fetchGifs={test} columns={4} gutter={6} /> */}
+        </Paper>
 
         {displaySearch ? (
-          <Search searchQuery={test} />
+          <Search searchQuery={handleSearch} width={width} />
         ) : (
           <GiphyGrid
             width={width}
