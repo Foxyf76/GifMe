@@ -46,6 +46,10 @@ const Home = ({ getImages, searchImages, setAlert }) => {
     return searchImages(query);
   };
 
+  const handleTrending = () => {
+    return getImages();
+  };
+
   return (
     <Grid container alignItems='center' justify='center' alignContent='center'>
       <Grid item style={{ width: '70%' }}>
@@ -76,16 +80,22 @@ const Home = ({ getImages, searchImages, setAlert }) => {
           </Paper>
         </Paper>
 
-        {displaySearch ? (
-          <Search searchQuery={handleSearch} width={width} />
-        ) : (
-          <GiphyGrid
-            width={width}
-            fetchGifs={getImages}
-            columns={4}
-            gutter={6}
-          />
-        )}
+        <div
+          style={{
+            marginBottom: '50px',
+          }}
+        >
+          {displaySearch ? (
+            <Search searchQuery={handleSearch} width={width} />
+          ) : (
+            <GiphyGrid
+              width={width}
+              fetchGifs={() => handleTrending()}
+              columns={4}
+              gutter={6}
+            />
+          )}
+        </div>
 
         <ResizeObserver
           onResize={({ width }) => {
