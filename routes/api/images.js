@@ -16,7 +16,7 @@ router.post('/get-trending', async (req, res) => {
   }
 });
 
-router.get('/search-images', async (req, res) => {
+router.post('/search-images', async (req, res) => {
   try {
     const fetchGifs = await gf.search(req.body.query, { limit: 10 });
     res.send(fetchGifs);
