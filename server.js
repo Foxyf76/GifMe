@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 // Define routes here
 app.use('/api/images', require('./routes/api/images'));
 app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/users', require('./routes/api/users'));
 
 const PORT = process.env.PORT || 5000;
 

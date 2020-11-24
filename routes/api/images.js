@@ -1,6 +1,7 @@
 const express = require('express');
 const config = require('config');
 const router = express.Router();
+
 global.fetch = require('node-fetch');
 
 const giphy = require('@giphy/js-fetch-api');
