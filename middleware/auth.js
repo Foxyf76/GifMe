@@ -13,7 +13,7 @@ module.exports = async function (req, res, next) {
   }
 
   try {
-    let decoded = jwt.verify(authToken, config.get('jwtSecret'));
+    let decoded = jwt.verify(authToken, process.env.jwtSecret);
     req.user = decoded.user;
     next();
   } catch (err) {
