@@ -10,11 +10,14 @@ import { colSecondary, colPrimary } from '../../helpers/colors';
 import { SearchOutlined } from '@material-ui/icons';
 import { Search } from './Search';
 
+import { Redirect, useHistory } from 'react-router-dom';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: '2px 4px',
     display: 'flex',
     alignItems: 'center',
+    borderRadius: '15px',
   },
   input: {
     marginLeft: theme.spacing(1),
@@ -28,13 +31,37 @@ const useStyles = makeStyles((theme) => ({
     height: 28,
     margin: 4,
   },
+  grid: {
+    '& img': {
+      borderRadius: '15px',
+    },
+  },
+  overlay: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    display: 'flex',
+    color: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    '&:hover': {
+      background: 'rgba(255, 255, 255, 0.3)',
+    },
+  },
 }));
 
 const Home = ({ getImages, searchImages, setAlert }) => {
   const classes = useStyles();
+  const history = useHistory();
   const [width, setWidth] = useState(window.innerWidth);
   const [query, setQuery] = useState('');
   const [displaySearch, setDisplaySearch] = useState(false);
+
+  const GifOverlay = ({ isHovered, gif }) => {
+    return <div className={classes.overlay}>{isHovered ? 'View' : ''}</div>;
+  };
 
   useEffect(() => {
     if (query === '') {
@@ -42,20 +69,20 @@ const Home = ({ getImages, searchImages, setAlert }) => {
     }
   }, [query]);
 
-  const handleSearch = () => {
-    return searchImages(query);
-  };
-
-  const handleTrending = () => {
-    return getImages();
+  const redirect = (gif) => {
+    history.push({
+      pathname: `/gif/${gif.id}`,
+      state: gif,
+    });
   };
 
   return (
     <Grid container alignItems='center' justify='center' alignContent='center'>
-      <Grid item style={{ width: '70%' }}>
+      <Grid item style={{ width: '80%' }}>
         <Paper
           style={{
             backgroundColor: colSecondary,
+            borderRadius: '15px',
             padding: '10px',
             marginTop: '10px',
             marginBottom: '10px',
@@ -86,13 +113,17 @@ const Home = ({ getImages, searchImages, setAlert }) => {
           }}
         >
           {displaySearch ? (
-            <Search searchQuery={handleSearch} width={width} />
+            <Search searchQuery={() => searchImages(query)} width={width} />
           ) : (
             <GiphyGrid
+              onGifClick={redirect}
+              noLink={true}
               width={width}
-              fetchGifs={() => handleTrending()}
+              fetchGifs={getImages}
+              overlay={GifOverlay}
               columns={4}
               gutter={6}
+              className={classes.grid}
             />
           )}
         </div>

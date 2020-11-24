@@ -9,6 +9,7 @@ import Alerter from './components/layout/Alerter';
 import { loadUser } from './actions/auth';
 import './App.css';
 import Navbar from './components/layout/Navbar';
+import Gif from './components/gif/Gif';
 
 const App = () => {
   if (localStorage.token) {
@@ -28,6 +29,7 @@ const App = () => {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/authenticate' component={Authenticate} />
+            <Route path='/gif/:id' component={Gif} />
           </Switch>
         </Fragment>
       </Router>
