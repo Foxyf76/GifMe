@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('config');
+require('dotenv').config();
 
 /**
  * Middleware to authenticate user, if token exists then contiue with request
