@@ -6,7 +6,8 @@ require('dotenv').config();
 global.fetch = require('node-fetch');
 
 const giphy = require('@giphy/js-fetch-api');
-const gf = new giphy.GiphyFetch(process.env.giphyKey);
+//const gf = new giphy.GiphyFetch(process.env.giphyKey);
+const gf = new giphy.GiphyFetch(config.get('giphyKey'));
 
 router.post('/get-trending', async (req, res) => {
   let offset = req.body.offset;

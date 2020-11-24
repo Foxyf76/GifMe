@@ -50,18 +50,33 @@ const Gif = ({ addToFavourites }) => {
   const locationData = useLocation();
   const { state } = locationData;
 
+  const gif = {
+    caption: state.title,
+    src: state.images.original.url,
+    importTime: state.import_datetime,
+    trendingTime: state.trending_datetime,
+    hyperlink: state.bitly_url,
+    size: state.images.original.size,
+    userAvatar: state.user.avatar_url,
+    userName: state.user.display_name,
+    userLink: state.user.profile_url,
+    thumbnail: state.images.downsized.url,
+    thumbnailWidth: state.images.downsized_small.width,
+    thumbnailHeight: state.images.downsized_small.height,
+  };
+
   if (state === undefined) {
     return <Redirect to='/' />;
   }
 
   const handleFavouriteClick = () => {
-    addToFavourites(state);
+    addToFavourites(gif);
   };
 
   const gifTitle = () => {
-    return state.title.length > 35
-      ? state.title.substring(0, 30) + '...'
-      : state.title;
+    return gif.caption > 35
+      ? gif.caption.substring(0, 30) + '...'
+      : gif.caption;
   };
 
   return (
@@ -75,11 +90,7 @@ const Gif = ({ addToFavourites }) => {
       <Grid container style={{ width: '80%' }} spacing={2}>
         <Grid item xs={5} sm={7}>
           <Paper className={classes.paper}>
-            <img
-              src={state.images.original.url}
-              alt={'gif'}
-              className={classes.gif}
-            />
+            <img src={gif.src} alt={'gif'} className={classes.gif} />
             <hr />
             <Grid container justify='center' spacing={3}>
               <Grid item>
@@ -96,7 +107,7 @@ const Gif = ({ addToFavourites }) => {
 
               <Grid item>
                 <a
-                  href={state.bitly_url}
+                  href={gif.hyperlink}
                   style={{ textDecoration: 'none' }}
                   target='_blank'
                   rel='noreferrer'
@@ -133,17 +144,15 @@ const Gif = ({ addToFavourites }) => {
             />
 
             <Typography className={classes.greyHeader}>Uploaded At:</Typography>
-            <Typography>{state.import_datetime}</Typography>
+            <Typography>{gif.importTime}</Typography>
 
             <Typography className={classes.greyHeader}>
               Trending Since:
             </Typography>
-            <Typography>{state.trending_datetime}</Typography>
+            <Typography>{gif.trendingTime}</Typography>
 
             <Typography className={classes.greyHeader}>Image Size:</Typography>
-            <Typography>
-              {(state.images.original.size / 1000000).toFixed(2)} MB
-            </Typography>
+            <Typography>{(gif.size / 1000000).toFixed(2)} MB</Typography>
 
             <hr />
 
@@ -162,7 +171,7 @@ const Gif = ({ addToFavourites }) => {
                 />
                 <Grid item xs={12} sm={6}>
                   <img
-                    src={state.user.avatar_url}
+                    src={gif.userAvatar}
                     height={100}
                     width={100}
                     alt='avatar'
@@ -171,11 +180,9 @@ const Gif = ({ addToFavourites }) => {
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                  <Typography variant={'h6'}>
-                    {state.user.display_name}
-                  </Typography>
+                  <Typography variant={'h6'}>{gif.userName}</Typography>
                   <a
-                    href={state.user.profile_url}
+                    href={gif.userLink}
                     style={{ textDecoration: 'none' }}
                     target='_blank'
                     rel='noreferrer'

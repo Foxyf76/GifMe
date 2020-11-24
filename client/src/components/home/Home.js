@@ -7,10 +7,11 @@ import { Grid as GiphyGrid } from '@giphy/react-components';
 import ResizeObserver from 'react-resize-observer';
 import { Grid, InputBase, makeStyles, Paper } from '@material-ui/core';
 import { colSecondary, colPrimary } from '../../helpers/colors';
-import { SearchOutlined } from '@material-ui/icons';
+import { SearchOutlined, TrendingUp } from '@material-ui/icons';
 import { Search } from './Search';
 
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { IconHeader } from '../layout/IconHeader';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -60,6 +61,7 @@ const Home = ({ getImages, searchImages, setAlert }) => {
   const [displaySearch, setDisplaySearch] = useState(false);
 
   const GifOverlay = ({ isHovered, gif }) => {
+    console.log(gif);
     return <div className={classes.overlay}>{isHovered ? 'View' : ''}</div>;
   };
 
@@ -106,6 +108,12 @@ const Home = ({ getImages, searchImages, setAlert }) => {
             />
           </Paper>
         </Paper>
+
+        <IconHeader
+          icon={TrendingUp}
+          subheader={false}
+          text={'Trending Gifs'}
+        />
 
         <div
           style={{

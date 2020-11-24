@@ -111,13 +111,8 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
                 transitionDuration={500}
                 TransitionComponent={Grow}
               >
-                <Link
-                  to='/favourites'
-                  style={{ textDecoration: 'none', color: 'black' }}
-                >
-                  <MenuItem onClick={handleClose}>Favourites</MenuItem>
-                </Link>
-
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Menu>
             </Grid>
