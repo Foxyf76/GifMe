@@ -1,3 +1,8 @@
+/**
+ * Extract relevant fields from Gif object
+ * @param {object} rawGif - Gif object
+ */
+
 export const constructGif = (rawGif) => {
   let gif = {
     id: rawGif.id,
