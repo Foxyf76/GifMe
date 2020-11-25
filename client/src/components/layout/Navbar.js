@@ -14,6 +14,7 @@ import { Grid, Grow } from '@material-ui/core';
 import { Spin as Hamburger } from 'hamburger-react';
 import { Link } from 'react-router-dom';
 import { colPrimary } from '../../helpers/colors';
+import { isMobile } from 'react-device-detect';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -58,21 +59,20 @@ const Navbar = ({ user, isAuthenticated, logout }) => {
             justify='center'
             direction='row'
           >
-            <Grid item xs={3} sm={2}>
+            <Grid item xs={2} sm={2}>
               <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>
-                <img src={logo} height={50} alt='logo' />
+                <img src={logo} height={isMobile ? 40 : 50} alt='logo' />
               </Link>
             </Grid>
 
-            <Grid item xs={2} sm={5} />
+            <Grid item xs={3} sm={5} />
 
             <Grid item xs={6} sm={4}>
               {isAuthenticated & (user != null) ? (
                 <Grid container justify='flex-end' xs={10} sm={12}>
                   <img
                     src={user.avatar}
-                    width={60}
-                    height={60}
+                    width={isMobile ? 40 : 70}
                     alt={'avatar'}
                     style={{ borderRadius: '200px' }}
                   />
