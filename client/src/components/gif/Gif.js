@@ -50,20 +50,7 @@ const Gif = ({ addToFavourites }) => {
   const locationData = useLocation();
   const { state } = locationData;
 
-  const gif = {
-    caption: state.title,
-    src: state.images.original.url,
-    importTime: state.import_datetime,
-    trendingTime: state.trending_datetime,
-    hyperlink: state.bitly_url,
-    size: state.images.original.size,
-    userAvatar: state.user.avatar_url,
-    userName: state.user.display_name,
-    userLink: state.user.profile_url,
-    thumbnail: state.images.downsized.url,
-    thumbnailWidth: state.images.downsized_small.width,
-    thumbnailHeight: state.images.downsized_small.height,
-  };
+  const gif = state;
 
   if (state === undefined) {
     return <Redirect to='/' />;
@@ -88,7 +75,7 @@ const Gif = ({ addToFavourites }) => {
     >
       <IconHeader icon={Image} text={gifTitle()} subheader={false} />
       <Grid container style={{ width: '80%' }} spacing={2}>
-        <Grid item xs={5} sm={7}>
+        <Grid item xs={12} sm={12} md={7}>
           <Paper className={classes.paper}>
             <img src={gif.src} alt={'gif'} className={classes.gif} />
             <hr />
@@ -135,7 +122,7 @@ const Gif = ({ addToFavourites }) => {
           </Paper>
         </Grid>
 
-        <Grid item xs={7} sm={5}>
+        <Grid item xs={12} sm={12} md={5}>
           <Paper className={classes.paper}>
             <IconHeader
               icon={Assignment}
@@ -156,7 +143,7 @@ const Gif = ({ addToFavourites }) => {
 
             <hr />
 
-            {state.user !== undefined ? (
+            {state.userName ? (
               <Grid
                 container
                 justify='center'

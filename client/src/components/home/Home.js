@@ -6,10 +6,9 @@ import { getImages, searchImages } from '../../actions/home';
 import { Grid as GiphyGrid } from '@giphy/react-components';
 import ResizeObserver from 'react-resize-observer';
 import { Grid, InputBase, makeStyles, Paper } from '@material-ui/core';
-import { colSecondary, colPrimary } from '../../helpers/colors';
+import { colSecondary } from '../../helpers/colors';
 import { SearchOutlined, TrendingUp } from '@material-ui/icons';
 import { Search } from './Search';
-
 import { useHistory } from 'react-router-dom';
 import { IconHeader } from '../layout/IconHeader';
 
@@ -61,7 +60,6 @@ const Home = ({ getImages, searchImages, setAlert }) => {
   const [displaySearch, setDisplaySearch] = useState(false);
 
   const GifOverlay = ({ isHovered, gif }) => {
-    console.log(gif);
     return <div className={classes.overlay}>{isHovered ? 'View' : ''}</div>;
   };
 
@@ -72,9 +70,25 @@ const Home = ({ getImages, searchImages, setAlert }) => {
   }, [query]);
 
   const redirect = (gif) => {
+    const gifData = {
+      id: gif.id,
+      caption: gif.title,
+      src: gif.images.original.url,
+      importTime: gif.import_datetime,
+      trendingTime: gif.trending_datetime,
+      hyperlink: gif.bitly_url,
+      size: gif.images.original.size,
+      userAvatar: gif.user.avatar_url,
+      userName: gif.user.display_name,
+      userLink: gif.user.profile_url,
+      thumbnail: gif.images.downsized.url,
+      thumbnailWidth: gif.images.downsized_small.width,
+      thumbnailHeight: gif.images.downsized_small.height,
+    };
+
     history.push({
-      pathname: `/gif/${gif.id}`,
-      state: gif,
+      pathname: `/gif/${gifData.id}`,
+      state: gifData,
     });
   };
 
