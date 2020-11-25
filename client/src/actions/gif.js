@@ -7,5 +7,6 @@ export const addToFavourites = (gif) => async (dispatch) => {
     dispatch(setAlert('Added to Favourites!', 'success'));
   } catch (err) {
     console.log(err);
+    dispatch(setAlert('Error adding to Favourites!', 'warning'));
   }
 };

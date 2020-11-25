@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import logo from '../../assets/logo.png';
 import Button from '@material-ui/core/Button';
 import { login, logout } from '../../actions/auth';
 import Menu from '@material-ui/core/Menu';
@@ -60,9 +60,10 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
           >
             <Grid item xs={2} sm={2}>
               <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>
-                <Typography variant={'h4'} style={{ fontFamily: 'Quicksand' }}>
+                {/* <Typography variant={'h4'} style={{ fontFamily: 'Quicksand' }}>
                   GifMe
-                </Typography>
+                </Typography> */}
+                <img src={logo} height={50} />
               </Link>
             </Grid>
 
@@ -120,7 +121,14 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
                   <MenuItem onClick={handleClose}>Favourites</MenuItem>
                 </Link>
 
-                <MenuItem onClick={() => logout()}>Logout</MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    logout();
+                    handleClose();
+                  }}
+                >
+                  Logout
+                </MenuItem>
               </Menu>
             </Grid>
           </Grid>

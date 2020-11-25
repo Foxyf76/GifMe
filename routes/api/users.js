@@ -8,11 +8,12 @@ router.put('/save-gif', auth, async (req, res) => {
   try {
     let gif = req.body.gif;
     let user = await User.findByIdAndUpdate(req.user.id);
-
     await user.favourites.push(gif);
+
     await user.save();
   } catch (err) {
-    console.log(err);
+    console.error(err.message);
+    res.status(500).send('Server error');
   }
 });
 

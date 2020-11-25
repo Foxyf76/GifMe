@@ -45,7 +45,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Gif = ({ addToFavourites }) => {
+const Gif = ({ addToFavourites, setAlert }) => {
   const classes = useStyles();
   const locationData = useLocation();
   const { state } = locationData;
@@ -74,7 +74,7 @@ const Gif = ({ addToFavourites }) => {
       direction='column'
     >
       <IconHeader icon={Image} text={gifTitle()} subheader={false} />
-      <Grid container style={{ width: '75%' }} spacing={2}>
+      <Grid container style={{ width: '70%' }} spacing={2}>
         <Grid item xs={12} sm={12} md={7}>
           <Paper className={classes.paper}>
             <img src={gif.src} alt={'gif'} className={classes.gif} />

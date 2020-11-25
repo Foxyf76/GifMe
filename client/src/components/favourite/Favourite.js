@@ -44,7 +44,7 @@ const Favourite = ({ user }) => {
       direction='column'
     >
       <IconHeader icon={Favorite} text={'Favourites'} subheader={false} />
-      <Grid item style={{ width: '80%' }}>
+      <Grid item style={{ width: '70%' }}>
         <Paper>
           <Gallery
             images={favourites}

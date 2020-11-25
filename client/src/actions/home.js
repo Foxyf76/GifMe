@@ -26,9 +26,9 @@ export const getImages = (offset) => async (dispatch) => {
 export const searchImages = (query) => async (dispatch) => {
   try {
     const res = await axios.post('/api/images/search-images', { query });
-    console.log('searching' + query);
     let data = res.data;
 
+    // to be implemented in search history
     if (localStorage.getItem('searches') === null) {
       let searches = [];
       searches[0] = query;
@@ -38,7 +38,6 @@ export const searchImages = (query) => async (dispatch) => {
       searches.push(query);
       localStorage.setItem('searches', JSON.stringify(searches));
     }
-    console.log(localStorage.getItem('searches'));
 
     return data;
   } catch (err) {

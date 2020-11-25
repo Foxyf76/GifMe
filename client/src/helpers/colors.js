@@ -1,5 +1,5 @@
-const colPrimary = '#3C91E6';
-const colSecondary = '#EF9CDA';
+const colPrimary = '#3584d4';
+const colSecondary = '#d98bc5';
 const colSuccess = '#E15554';
 const colError = '#3BB273';
 

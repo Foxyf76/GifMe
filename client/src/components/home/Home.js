@@ -5,14 +5,19 @@ import { setAlert } from '../../actions/alert';
 import { getImages, searchImages } from '../../actions/home';
 import { Grid as GiphyGrid } from '@giphy/react-components';
 import ResizeObserver from 'react-resize-observer';
-import { Grid, InputBase, makeStyles, Paper } from '@material-ui/core';
+import {
+  Grid,
+  InputBase,
+  makeStyles,
+  Paper,
+  Typography,
+} from '@material-ui/core';
 import { colSecondary } from '../../helpers/colors';
 import { SearchOutlined, TrendingUp } from '@material-ui/icons';
 import { Search } from './Search';
 import { useHistory } from 'react-router-dom';
 import { IconHeader } from '../layout/IconHeader';
 import { constructGif } from '../../helpers/generalHelper';
-// import { contructGif } from '../../helpers/generalHelper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
   },
   overlay: {
     position: 'absolute',
+    borderRadius: '15px',
     left: 0,
     top: 0,
     right: 0,
@@ -49,7 +55,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     '&:hover': {
-      background: 'rgba(255, 255, 255, 0.3)',
+      background: 'rgba(0, 0, 0, 0.4)',
+      cursor: 'pointer',
     },
   },
 }));
@@ -62,7 +69,17 @@ const Home = ({ getImages, searchImages, setAlert }) => {
   const [displaySearch, setDisplaySearch] = useState(false);
 
   const GifOverlay = ({ isHovered, gif }) => {
-    return <div className={classes.overlay}>{isHovered ? 'View' : ''}</div>;
+    console.log(gif);
+    let overlay = isHovered ? (
+      <div className={classes.overlay}>
+        <Typography style={{ fontFamily: 'Quicksand', fontSize: '20px' }}>
+          View
+        </Typography>
+      </div>
+    ) : (
+      <div />
+    );
+    return overlay;
   };
 
   useEffect(() => {
@@ -95,6 +112,9 @@ const Home = ({ getImages, searchImages, setAlert }) => {
           <Paper className={classes.root}>
             <SearchOutlined fontSize='large' />
             <InputBase
+              inputProps={{
+                maxLength: 20,
+              }}
               className={classes.input}
               onInput={(e) => {
                 if (!e.target.value !== query) {
@@ -111,11 +131,19 @@ const Home = ({ getImages, searchImages, setAlert }) => {
           </Paper>
         </Paper>
 
-        <IconHeader
-          icon={TrendingUp}
-          subheader={false}
-          text={'Trending Gifs'}
-        />
+        {displaySearch ? (
+          <IconHeader
+            icon={SearchOutlined}
+            subheader={false}
+            text={`You Searched '${query}'`}
+          />
+        ) : (
+          <IconHeader
+            icon={TrendingUp}
+            subheader={false}
+            text={'Trending Gifs'}
+          />
+        )}
 
         <div
           style={{
