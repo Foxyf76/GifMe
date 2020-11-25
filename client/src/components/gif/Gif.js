@@ -143,7 +143,7 @@ const Gif = ({ addToFavourites }) => {
 
             <hr />
 
-            {state.userName ? (
+            {state.userName !== undefined && state.userAvatar !== undefined ? (
               <Grid
                 container
                 justify='center'

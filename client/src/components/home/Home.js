@@ -11,6 +11,8 @@ import { SearchOutlined, TrendingUp } from '@material-ui/icons';
 import { Search } from './Search';
 import { useHistory } from 'react-router-dom';
 import { IconHeader } from '../layout/IconHeader';
+import { constructGif } from '../../helpers/generalHelper';
+// import { contructGif } from '../../helpers/generalHelper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,21 +72,7 @@ const Home = ({ getImages, searchImages, setAlert }) => {
   }, [query]);
 
   const redirect = (gif) => {
-    const gifData = {
-      id: gif.id,
-      caption: gif.title,
-      src: gif.images.original.url,
-      importTime: gif.import_datetime,
-      trendingTime: gif.trending_datetime,
-      hyperlink: gif.bitly_url,
-      size: gif.images.original.size,
-      userAvatar: gif.user.avatar_url,
-      userName: gif.user.display_name,
-      userLink: gif.user.profile_url,
-      thumbnail: gif.images.downsized.url,
-      thumbnailWidth: gif.images.downsized_small.width,
-      thumbnailHeight: gif.images.downsized_small.height,
-    };
+    const gifData = constructGif(gif);
 
     history.push({
       pathname: `/gif/${gifData.id}`,
@@ -135,7 +123,12 @@ const Home = ({ getImages, searchImages, setAlert }) => {
           }}
         >
           {displaySearch ? (
-            <Search searchQuery={() => searchImages(query)} width={width} />
+            <Search
+              searchQuery={() => searchImages(query)}
+              width={width}
+              overlay={GifOverlay}
+              handleClick={redirect}
+            />
           ) : (
             <GiphyGrid
               onGifClick={redirect}
