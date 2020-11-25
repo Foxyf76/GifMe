@@ -11,6 +11,7 @@ router.put('/save-gif', auth, async (req, res) => {
     await user.favourites.push(gif);
 
     await user.save();
+    res.status(200).send('success');
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server error');

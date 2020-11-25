@@ -45,14 +45,12 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Gif = ({ addToFavourites, setAlert }) => {
+const Gif = ({ addToFavourites }) => {
   const classes = useStyles();
   const locationData = useLocation();
-  const { state } = locationData;
+  const gif = locationData.state;
 
-  const gif = state;
-
-  if (state === undefined) {
+  if (gif === undefined) {
     return <Redirect to='/' />;
   }
 
@@ -143,7 +141,7 @@ const Gif = ({ addToFavourites, setAlert }) => {
 
             <hr />
 
-            {state.userName !== undefined && state.userAvatar !== undefined ? (
+            {gif.userName !== undefined && gif.userAvatar !== undefined ? (
               <Grid
                 container
                 justify='center'

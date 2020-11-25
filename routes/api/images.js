@@ -16,6 +16,7 @@ router.post('/get-trending', async (req, res) => {
     res.send(fetchGifs);
   } catch (err) {
     console.error(err);
+    res.status(500).send('Server error');
   }
 });
 
@@ -25,6 +26,7 @@ router.post('/search-images', async (req, res) => {
     res.send(fetchGifs);
   } catch (err) {
     console.error(err);
+    res.status(500).send('Server error');
   }
 });
 

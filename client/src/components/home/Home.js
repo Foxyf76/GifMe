@@ -26,6 +26,13 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     borderRadius: '15px',
   },
+  searchBar: {
+    backgroundColor: colSecondary,
+    borderRadius: '15px',
+    padding: '10px',
+    marginTop: '10px',
+    marginBottom: '10px',
+  },
   input: {
     marginLeft: theme.spacing(1),
     height: '40px',
@@ -100,15 +107,7 @@ const Home = ({ getImages, searchImages, setAlert }) => {
   return (
     <Grid container alignItems='center' justify='center' alignContent='center'>
       <Grid item style={{ width: '70%' }}>
-        <Paper
-          style={{
-            backgroundColor: colSecondary,
-            borderRadius: '15px',
-            padding: '10px',
-            marginTop: '10px',
-            marginBottom: '10px',
-          }}
-        >
+        <Paper className={classes.searchBar}>
           <Paper className={classes.root}>
             <SearchOutlined fontSize='large' />
             <InputBase

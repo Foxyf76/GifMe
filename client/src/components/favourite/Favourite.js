@@ -66,15 +66,10 @@ const Favourite = ({ user }) => {
 };
 
 Favourite.propTypes = {
-  setAlert: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired,
-  logout: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool,
   user: PropTypes.object,
 };
 
 const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
   user: state.auth.user,
 });
 

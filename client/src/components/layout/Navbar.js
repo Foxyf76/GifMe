@@ -21,7 +21,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
+const Navbar = ({ user, isAuthenticated, logout }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState(false);
@@ -60,10 +60,7 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
           >
             <Grid item xs={2} sm={2}>
               <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>
-                {/* <Typography variant={'h4'} style={{ fontFamily: 'Quicksand' }}>
-                  GifMe
-                </Typography> */}
-                <img src={logo} height={50} />
+                <img src={logo} height={50} alt='logo' />
               </Link>
             </Grid>
 
@@ -139,7 +136,6 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
 };
 
 Navbar.propTypes = {
-  setAlert: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool,
