@@ -6,8 +6,14 @@ require('dotenv').config();
 global.fetch = require('node-fetch');
 
 const giphy = require('@giphy/js-fetch-api');
-//const gf = new giphy.GiphyFetch(process.env.giphyKey);
-const gf = new giphy.GiphyFetch(config.get('giphyKey'));
+const gf = new giphy.GiphyFetch(process.env.giphyKey);
+//const gf = new giphy.GiphyFetch(config.get('giphyKey'));
+
+/**
+ * @route    POST api/images/get-trending
+ * @desc     Retrieve Giphy trending images
+ * @access   Public
+ */
 
 router.post('/get-trending', async (req, res) => {
   let offset = req.body.offset;
@@ -19,6 +25,12 @@ router.post('/get-trending', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
+/**
+ * @route    POST api/images/search-images
+ * @desc     Search from Giphy images
+ * @access   Public
+ */
 
 router.post('/search-images', async (req, res) => {
   try {

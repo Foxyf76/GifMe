@@ -23,6 +23,11 @@ export const getImages = (offset) => async (dispatch) => {
   }
 };
 
+/**
+ * Pull images from search query
+ * @param {string} query - Starting position for pulling images
+ */
+
 export const searchImages = (query) => async (dispatch) => {
   try {
     const res = await axios.post('/api/images/search-images', { query });
