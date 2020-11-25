@@ -7,7 +7,7 @@ global.fetch = require('node-fetch');
 
 const giphy = require('@giphy/js-fetch-api');
 const gf = new giphy.GiphyFetch(process.env.giphyKey);
-//const gf = new giphy.GiphyFetch(config.get('giphyKey'));
+// const gf = new giphy.GiphyFetch(config.get('giphyKey'));
 
 /**
  * @route    POST api/images/get-trending
@@ -34,7 +34,7 @@ router.post('/get-trending', async (req, res) => {
 
 router.post('/search-images', async (req, res) => {
   try {
-    const fetchGifs = await gf.search(req.body.query, { limit: 15 });
+    const fetchGifs = await gf.search(req.body.query, { limit: 50 });
     res.send(fetchGifs);
   } catch (err) {
     console.error(err);

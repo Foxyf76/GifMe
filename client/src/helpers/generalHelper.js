@@ -12,15 +12,15 @@ export const constructGif = (rawGif) => {
     trendingTime: rawGif.trending_datetime,
     hyperlink: rawGif.bitly_url,
     size: rawGif.images.original.size,
+    thumbnail: rawGif.images.downsized.url,
+    thumbnailWidth: rawGif.images.downsized_small.width,
+    thumbnailHeight: rawGif.images.downsized_small.height,
   };
 
   if (rawGif.hasOwnProperty('user')) {
     gif.userAvatar = rawGif.user.avatar_url;
     gif.userName = rawGif.user.display_name;
     gif.userLink = rawGif.user.profile_url;
-    gif.thumbnail = rawGif.images.downsized.url;
-    gif.thumbnailWidth = rawGif.images.downsized_small.width;
-    gif.thumbnailHeight = rawGif.images.downsized_small.height;
   }
   return gif;
 };
