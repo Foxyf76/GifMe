@@ -82,7 +82,7 @@ const Home = ({ getImages, searchImages, setAlert }) => {
 
   return (
     <Grid container alignItems='center' justify='center' alignContent='center'>
-      <Grid item style={{ width: '80%' }}>
+      <Grid item style={{ width: '70%' }}>
         <Paper
           style={{
             backgroundColor: colSecondary,

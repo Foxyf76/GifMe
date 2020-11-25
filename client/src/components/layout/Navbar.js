@@ -42,6 +42,7 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
         position='static'
         style={{
           backgroundColor: colPrimary,
+          height: '100px',
         }}
       >
         <Toolbar
@@ -57,7 +58,7 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
             justify='center'
             direction='row'
           >
-            <Grid item xs={2}>
+            <Grid item xs={2} sm={2}>
               <Link to='/' style={{ textDecoration: 'none', color: 'white' }}>
                 <Typography variant={'h4'} style={{ fontFamily: 'Quicksand' }}>
                   GifMe
@@ -65,21 +66,18 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
               </Link>
             </Grid>
 
-            <Grid item xs={5} />
+            <Grid item xs={3} sm={5} />
 
-            <Grid item xs={4}>
+            <Grid item xs={6} sm={4}>
               {isAuthenticated & (user != null) ? (
-                <Grid container justify='flex-end'>
+                <Grid container justify='flex-end' xs={10} sm={12}>
                   <img
                     src={user.avatar}
-                    width={50}
-                    height={50}
+                    width={70}
+                    height={70}
                     alt={'avatar'}
                     style={{ borderRadius: '200px' }}
                   />
-                  <Button color='inherit' onClick={() => logout()}>
-                    Log Out
-                  </Button>
                 </Grid>
               ) : (
                 <Grid container justify='flex-end'>
@@ -93,7 +91,11 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
               )}
             </Grid>
             <Grid container xs={1} justify='center'>
-              <Button size='small' onClick={handleClick}>
+              <Button
+                size='small'
+                onClick={handleClick}
+                style={{ borderRadius: '200px' }}
+              >
                 <Hamburger
                   size={25}
                   toggled={open}
@@ -118,7 +120,7 @@ const Navbar = ({ setAlert, user, isAuthenticated, logout }) => {
                   <MenuItem onClick={handleClose}>Favourites</MenuItem>
                 </Link>
 
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={() => logout()}>Logout</MenuItem>
               </Menu>
             </Grid>
           </Grid>
